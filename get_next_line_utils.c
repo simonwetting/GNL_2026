@@ -104,5 +104,6 @@ char	*ft_strdup(const char *s)
 	index = -1;
 	while (++index < length)
 		output[index] = s[index];
+	output[index] = 0;
 	return (output);
 }

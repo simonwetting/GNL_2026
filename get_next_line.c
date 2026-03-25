@@ -36,7 +36,7 @@ char	*get_next_line(int fd)
 		buf2[bytes_read] = 0;
 		buf1 = ft_strjoin(buf1, buf2);
 		newline = ft_strchr(buf1, '\n');
-		if (bytes_read < BUFFER_SIZE - 1)
+		if (bytes_read < BUFFER_SIZE)
 			return (buf1);
 		// if (!bytes_read)
 		// 	return (NULL);
