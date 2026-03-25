@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:24 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/17 10:50:24 by anonymous     ########   odam.nl         */
+/*   Updated: 2026/03/25 15:33:18 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define GET_NEXT_LINE_H
 # define BUFFER_SIZE 50
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 char	*ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
@@ -28,8 +29,8 @@ size_t	ft_strlen(const char *s);
 
 typedef struct s_list
 {
-	char	*content;
-	struct	s_list *next;
+	char			*content;
+	struct s_list	*next;
 }			t_List;
 
 char	*get_next_line(int fd);

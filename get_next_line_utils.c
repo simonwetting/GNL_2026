@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:30 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/17 10:50:30 by anonymous     ########   odam.nl         */
+/*   Updated: 2026/03/25 15:33:51 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	ft_strlen(const char *s)
 	length = 0;
 	while (s[length])
 		length++;
-	return length;
+	return (length);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -43,7 +43,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	output = malloc(len_s1 + len_s2 + 1);
-	index = -1;	while (++index < len_s1)
+	index = -1;
+	while (++index < len_s1)
 		output[index] = s1[index];
 	index = -1;
 	while (++index < len_s2)
