@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:27 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/25 15:32:35 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/30 15:05:24 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_next_line(int fd)
 		buf2[bytes_read] = 0;
 		buf1 = ft_strjoin(buf1, buf2);
 		newline = ft_strchr(buf1, '\n');
-		if (bytes_read < BUFFER_SIZE)
+		if (bytes_read < BUFFER_SIZE && ft_strchr(buf1, '\n') == 0)
 			return (buf1);
 	}
 	rest = ft_substr(ft_strchr(buf1, '\n') + 1,

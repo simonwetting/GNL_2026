@@ -6,13 +6,13 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:24 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/25 15:33:18 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/30 14:53:54 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 50
+# define BUFFER_SIZE 500
 
 # include <fcntl.h>
 # include <unistd.h>
