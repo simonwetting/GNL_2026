@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:27 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/31 14:06:22 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/31 14:29:05 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,13 @@ char	*get_next_line(int fd)
 	ft_subcpy(ft_strchr(buf1, '\n') + 1,
 			ft_strlen(buf1) - (ft_strchr(buf1, '\n') - buf1), rest);
 	output =  ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1);
-	//return (ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1));
 	free(buf1);
-	//if (output[0] == 0)
-	//{
-	//	free(output);
-	//	output = NULL;
-	//}
 	return (output);
 }
+
+//return (ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1));
+
+
 
 	//buf1 = malloc(BUFFER_SIZE + 1);
 	//if (!rest)
