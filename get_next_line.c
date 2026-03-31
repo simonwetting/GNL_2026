@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:27 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/31 14:29:05 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/31 14:43:05 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ char	*get_next_line(int fd)
 	char		*buf2;
 	int			bytes_read;
 	char		*newline;
-	//static char	*rest = NULL;
 	static char	rest[BUFFER_SIZE];
 	char		*output;
 
