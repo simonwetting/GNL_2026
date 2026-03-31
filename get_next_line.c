@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:27 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/31 14:43:05 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/31 14:49:23 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ int	use_rest(char *rest, char **buf1, int fd)
 	return (1);
 }
 
+char	*free_and_return_null(void *p)
+{
+	free (p);
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*buf1;
@@ -93,12 +99,7 @@ char	*get_next_line(int fd)
 		buf1 = ft_strjoin(buf1, buf2);
 		newline = ft_strchr(buf1, '\n');
 		if (buf1[0] == 0)
-		{
-			free(buf1);
-			buf1 = NULL;
-			if (bytes_read < BUFFER_SIZE)
-				return (NULL);
-		}
+			return (free_and_return_null(buf1));
 		if (bytes_read < BUFFER_SIZE && ft_strchr(buf1, '\n') == 0)
 			return (buf1);
 	}
