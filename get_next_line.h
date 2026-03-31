@@ -6,12 +6,12 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:24 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/31 13:55:00 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/31 14:12:43 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 10
 #endif
 
 #ifndef GET_NEXT_LINE_H
