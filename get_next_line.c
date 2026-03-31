@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:27 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/31 14:49:23 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/31 15:00:17 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,20 @@ char	*ft_subcpy(char const *s, size_t len, char *out)
 	return (out);
 }
 
-int	use_rest(char *rest, char **buf1, int fd)
+char	*free_and_return_null(char **p)
+{
+	free (*p);
+	*p = NULL;
+	return (NULL);
+}
+
+char	*use_rest(char *rest, char **buf1, int fd)
 {
 	int	i;
 	int	bytes_read;
 
+	if (BUFFER_SIZE < 1 || fd < 0)
+		return (0);
 	i = -1;
 	*buf1 = malloc(BUFFER_SIZE + 1);
 	if (!*buf1)
@@ -51,11 +60,7 @@ int	use_rest(char *rest, char **buf1, int fd)
 	{
 		bytes_read = read(fd, *buf1, BUFFER_SIZE);
 		if (bytes_read < 0)     // ← ADD THIS CHECK
-		{
-			free(*buf1);
-			*buf1 = NULL;
-			return (0);
-		}
+			return (free_and_return_null(buf1));
 		(*buf1)[bytes_read] = 0;
 	}
 	else
@@ -66,13 +71,7 @@ int	use_rest(char *rest, char **buf1, int fd)
 			(*buf1)[i++] = 0;
 		rest[0] = 0;
 	}
-	return (1);
-}
-
-char	*free_and_return_null(void *p)
-{
-	free (p);
-	return (NULL);
+	return ((char *)1);
 }
 
 char	*get_next_line(int fd)
@@ -84,8 +83,6 @@ char	*get_next_line(int fd)
 	static char	rest[BUFFER_SIZE];
 	char		*output;
 
-	if (BUFFER_SIZE < 1 || fd < 0)
-		return (0);
 	if(use_rest(rest, &buf1, fd) == 0)
 		return (0);
 	newline = ft_strchr(buf1, '\n');
@@ -99,7 +96,7 @@ char	*get_next_line(int fd)
 		buf1 = ft_strjoin(buf1, buf2);
 		newline = ft_strchr(buf1, '\n');
 		if (buf1[0] == 0)
-			return (free_and_return_null(buf1));
+			return (free_and_return_null(&buf1));
 		if (bytes_read < BUFFER_SIZE && ft_strchr(buf1, '\n') == 0)
 			return (buf1);
 	}
