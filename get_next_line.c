@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/17 10:50:27 by anonymous     #+#    #+#                 */
-/*   Updated: 2026/03/30 17:51:55 by swetting      ########   odam.nl         */
+/*   Updated: 2026/03/31 14:06:22 by swetting      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,35 @@ char	*ft_subcpy(char const *s, size_t len, char *out)
 	return (out);
 }
 
-void	use_rest(char *rest, char **buf1, int fd, int *bytes_read)
+int	use_rest(char *rest, char **buf1, int fd)
 {
-	if (!(rest))
+	int	i;
+	int	bytes_read;
+
+	i = -1;
+	*buf1 = malloc(BUFFER_SIZE + 1);
+	if (!*buf1)
+		return (0);
+	if (rest[0] == 0)
 	{
-		*bytes_read = read(fd, *buf1, BUFFER_SIZE);
-		*buf1 = malloc(BUFFER_SIZE + 1);
-		(*buf1)[*bytes_read] = 0;
+		bytes_read = read(fd, *buf1, BUFFER_SIZE);
+		if (bytes_read < 0)     // ← ADD THIS CHECK
+		{
+			free(*buf1);
+			*buf1 = NULL;
+			return (0);
+		}
+		(*buf1)[bytes_read] = 0;
 	}
 	else
 	{
-		//free(*buf1);
-		*buf1 = ft_strdup(rest);
-		//free(*rest);
-		//*rest = NULL;
+		while (rest[++i])
+			(*buf1)[i] = rest[i];
+		while (i <= BUFFER_SIZE)
+			(*buf1)[i++] = 0;
+		rest[0] = 0;
 	}
+	return (1);
 }
 
 char	*get_next_line(int fd)
@@ -65,9 +79,10 @@ char	*get_next_line(int fd)
 	static char	rest[BUFFER_SIZE];
 	char		*output;
 
-	if (BUFFER_SIZE < 1)
+	if (BUFFER_SIZE < 1 || fd < 0)
 		return (0);
-	use_rest(rest, &buf1, fd, &bytes_read);
+	if(use_rest(rest, &buf1, fd) == 0)
+		return (0);
 	newline = ft_strchr(buf1, '\n');
 	while (!newline)
 	{
@@ -78,6 +93,13 @@ char	*get_next_line(int fd)
 		buf2[bytes_read] = 0;
 		buf1 = ft_strjoin(buf1, buf2);
 		newline = ft_strchr(buf1, '\n');
+		if (buf1[0] == 0)
+		{
+			free(buf1);
+			buf1 = NULL;
+			if (bytes_read < BUFFER_SIZE)
+				return (NULL);
+		}
 		if (bytes_read < BUFFER_SIZE && ft_strchr(buf1, '\n') == 0)
 			return (buf1);
 	}
@@ -86,6 +108,11 @@ char	*get_next_line(int fd)
 	output =  ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1);
 	//return (ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1));
 	free(buf1);
+	//if (output[0] == 0)
+	//{
+	//	free(output);
+	//	output = NULL;
+	//}
 	return (output);
 }
 
