@@ -81,7 +81,6 @@ char	*get_next_line(int fd)
 	int			bytes_read;
 	char		*newline;
 	static char	rest[BUFFER_SIZE];
-	char		*output;
 
 	if(use_rest(rest, &buf1, fd) == 0)
 		return (0);
@@ -102,9 +101,8 @@ char	*get_next_line(int fd)
 	}
 	ft_subcpy(ft_strchr(buf1, '\n') + 1,
 			ft_strlen(buf1) - (ft_strchr(buf1, '\n') - buf1), rest);
-	output =  ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1);
-	free(buf1);
-	return (output);
+	buf1[ft_strchr(buf1, '\n') - buf1 + 1] = 0;
+	return (buf1);
 }
 
 //return (ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1));
