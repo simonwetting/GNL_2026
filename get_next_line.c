@@ -74,6 +74,14 @@ char	*use_rest(char *rest, char **buf1, int fd)
 	return ((char *)1);
 }
 
+char	*split_buf(char *buf1, char *rest)
+{
+	ft_subcpy(ft_strchr(buf1, '\n') + 1,
+			ft_strlen(buf1) - (ft_strchr(buf1, '\n') - buf1), rest);
+	buf1[ft_strchr(buf1, '\n') - buf1 + 1] = 0;
+	return (buf1);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*buf1;
@@ -99,10 +107,7 @@ char	*get_next_line(int fd)
 		if (bytes_read < BUFFER_SIZE && ft_strchr(buf1, '\n') == 0)
 			return (buf1);
 	}
-	ft_subcpy(ft_strchr(buf1, '\n') + 1,
-			ft_strlen(buf1) - (ft_strchr(buf1, '\n') - buf1), rest);
-	buf1[ft_strchr(buf1, '\n') - buf1 + 1] = 0;
-	return (buf1);
+	return (split_buf(buf1, rest));
 }
 
 //return (ft_substr(buf1, ft_strchr(buf1, '\n') - buf1 + 1));
